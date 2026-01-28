@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Bureaucracy Autopilot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="options-page">
+    <header class="options-header">
+      <div class="logo" style="margin-bottom: 16px;">
+        <span class="logo-icon">B</span>
+        <span class="logo-text">Bureaucracy Autopilot</span>
+      </div>
+      <h1 class="options-title">Settings</h1>
+      <p class="options-subtitle">Manage your profile data for form autofill.</p>
+      <a href="onboarding.html" target="_blank" class="onboarding-link" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 13px; color: #2d4a3e; text-decoration: none;">
+        <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="8.5" cy="7" r="4"></circle>
+          <path d="M20 8v6M23 11h-6"></path>
+        </svg>
+        Open Setup Wizard
+      </a>
+    </header>
+
+    <main>
+      <form id="profile-form">
+        <!-- Personal Info -->
+        <div class="form-section">
+          <h2 class="form-section-title">Personal Information</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" class="form-input" placeholder="John Doe">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (555) 123-4567">
+            </div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-section">
+          <h2 class="form-section-title">Address</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="addressLine1">Address Line 1</label>
+            <input type="text" id="addressLine1" name="addressLine1" class="form-input" placeholder="123 Main Street">
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label class="form-label" for="city">City</label>
+              <input type="text" id="city" name="city" class="form-input" placeholder="San Francisco">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="state">State</label>
+              <input type="text" id="state" name="state" class="form-input" placeholder="CA">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="zip">ZIP Code</label>
+              <input type="text" id="zip" name="zip" class="form-input" placeholder="94102">
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+          <button type="button" id="reset-btn" class="btn btn-secondary">Reset to Defaults</button>
+        </div>
+
+        <p id="save-status" class="save-status"></p>
+      </form>
+    </main>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

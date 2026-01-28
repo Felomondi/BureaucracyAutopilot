@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setup - Bureaucracy Autopilot</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+  <div class="onboarding">
+    <!-- Progress Bar -->
+    <header class="onboarding-header">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">B</span>
+          <span class="logo-text">Bureaucracy Autopilot</span>
+        </div>
+        <div class="progress-info">
+          <span id="step-counter">Step 1 of 6</span>
+          <button id="exit-btn" class="btn-text" title="Save and exit">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill" style="width: 16.67%"></div>
+      </div>
+    </header>
+
+    <div class="onboarding-body">
+      <!-- Sidebar -->
+      <aside class="onboarding-sidebar">
+        <nav class="step-nav">
+          <button class="step-nav-item active" data-step="welcome">
+            <span class="step-number">1</span>
+            <span class="step-label">Welcome</span>
+            <span class="step-status"></span>
+          </button>
+          <button class="step-nav-item" data-step="form-types">
+            <span class="step-number">2</span>
+            <span class="step-label">Form Types</span>
+            <span class="step-status"></span>
+          </button>
+          <button class="step-nav-item locked" data-step="build-profile">
+            <span class="step-number">3</span>
+            <span class="step-label">Build Profile</span>
+            <span class="step-status"></span>
+          </button>
+          <button class="step-nav-item locked" data-step="review">
+            <span class="step-number">4</span>
+            <span class="step-label">Review</span>
+            <span class="step-status"></span>
+          </button>
+          <button class="step-nav-item locked" data-step="test">
+            <span class="step-number">5</span>
+            <span class="step-label">Test</span>
+            <span class="step-status"></span>
+          </button>
+          <button class="step-nav-item locked" data-step="finish">
+            <span class="step-number">6</span>
+            <span class="step-label">Finish</span>
+            <span class="step-status"></span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="estimated-time">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            <span id="time-estimate">~5 minutes</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="onboarding-main">
+        <!-- Step 1: Welcome -->
+        <div class="step-content active" data-step="welcome">
+          <div class="step-header">
+            <span class="step-badge">Getting Started</span>
+            <h1>Welcome to Bureaucracy Autopilot</h1>
+            <p class="step-description">
+              Let's set up your profile so you can fill forms in seconds. 
+              This wizard will guide you through the process.
+            </p>
+          </div>
+
+          <div class="trust-cards">
+            <div class="trust-card">
+              <div class="trust-icon">🔒</div>
+              <h3>Your Data Stays Local</h3>
+              <p>All profile data is stored locally in your browser. We never send your information to external servers.</p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-icon">👁️</div>
+              <h3>Review Before Submit</h3>
+              <p>You always review filled fields before submitting. We never auto-submit forms.</p>
+            </div>
+            <div class="trust-card">
+              <div class="trust-icon">🛡️</div>
+              <h3>Sensitive Fields Protected</h3>
+              <p>SSN, passwords, and payment info require explicit confirmation or are never auto-filled.</p>
+            </div>
+          </div>
+
+          <div class="step-cta">
+            <p class="cta-note">Ready to save hours on repetitive forms?</p>
+          </div>
+        </div>
+
+        <!-- Step 2: Form Types -->
+        <div class="step-content" data-step="form-types">
+          <div class="step-header">
+            <span class="step-badge">Personalize</span>
+            <h1>What forms do you fill most often?</h1>
+            <p class="step-description">
+              Select the types of forms you commonly encounter. 
+              This customizes which profile sections you'll fill out.
+            </p>
+          </div>
+
+          <div class="form-types-instruction">
+            <svg class="instruction-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <circle cx="12" cy="17" r=".5"/>
+            </svg>
+            <span>Click to select multiple form types. You can change this later.</span>
+          </div>
+
+          <div class="form-types-grid" id="form-types-grid">
+            <!-- Populated by JavaScript -->
+          </div>
+
+          <div class="selection-summary" id="selection-summary">
+            <div class="summary-empty">
+              <svg class="summary-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8v4M12 16h.01"/>
+              </svg>
+              <span class="summary-text">Select at least one form type to continue</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Build Profile -->
+        <div class="step-content" data-step="build-profile">
+          <div class="step-header">
+            <span class="step-badge">Your Information</span>
+            <h1>Build Your Profile</h1>
+            <p class="step-description">
+              Fill in your information below. Fields are saved automatically.
+            </p>
+          </div>
+
+          <div class="profile-builder">
+            <!-- Module Sidebar -->
+            <aside class="module-sidebar" id="module-sidebar">
+              <div class="module-list" id="module-list">
+                <!-- Populated by JavaScript -->
+              </div>
+              <div class="overall-completion">
+                <div class="completion-label">Overall Completion</div>
+                <div class="completion-bar">
+                  <div class="completion-fill" id="overall-completion-fill" style="width: 0%"></div>
+                </div>
+                <div class="completion-percent" id="overall-completion-percent">0%</div>
+              </div>
+            </aside>
+
+            <!-- Module Forms -->
+            <div class="module-forms" id="module-forms">
+              <!-- Module: Contact -->
+              <div class="module-form active" data-module="contact" id="module-contact">
+                <div class="module-form-header">
+                  <div class="module-title-row">
+                    <h3>Contact Information</h3>
+                    <span class="module-required-badge">Required</span>
+                  </div>
+                  <p class="module-description">Your name, email, and phone number for form autofill.</p>
+                  <div class="module-completion-row">
+                    <div class="completion-bar small">
+                      <div class="completion-fill" id="contact-completion-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="completion-text" id="contact-completion-text">0% complete</span>
+                  </div>
+                </div>
+                <div class="module-form-body">
+                  <div class="field-group">
+                    <label for="fullName">Full Name <span class="required-star">*</span></label>
+                    <input type="text" id="fullName" name="fullName" placeholder="John Doe" data-module="contact" data-field="fullName" required>
+                    <span class="field-helper">As it appears on official documents</span>
+                    <span class="field-error" id="fullName-error"></span>
+                  </div>
+                  <div class="field-row">
+                    <div class="field-group">
+                      <label for="email">Email Address <span class="required-star">*</span></label>
+                      <input type="email" id="email" name="email" placeholder="john@example.com" data-module="contact" data-field="email" required>
+                      <span class="field-helper">Primary email for communications</span>
+                      <span class="field-error" id="email-error"></span>
+                    </div>
+                    <div class="field-group">
+                      <label for="phone">Phone Number <span class="required-star">*</span></label>
+                      <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" data-module="contact" data-field="phone" required>
+                      <span class="field-helper">Mobile or landline</span>
+                      <span class="field-error" id="phone-error"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="module-form-footer">
+                  <button type="button" class="btn btn-primary save-module-btn" data-module="contact">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                      <path d="M17 21v-8H7v8M7 3v5h8"/>
+                    </svg>
+                    Save Contact Info
+                  </button>
+                  <span class="save-status" id="contact-save-status"></span>
+                </div>
+              </div>
+
+              <!-- Module: Address (Multi-Entry) -->
+              <div class="module-form multi-entry" data-module="address" id="module-address">
+                <div class="module-form-header">
+                  <div class="module-title-row">
+                    <h3>Addresses</h3>
+                    <span class="module-required-badge">Required</span>
+                  </div>
+                  <p class="module-description">Add multiple addresses (home, work, mailing). Primary is used for autofill.</p>
+                  <div class="module-completion-row">
+                    <div class="completion-bar small">
+                      <div class="completion-fill" id="address-completion-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="completion-text" id="address-completion-text">0% complete</span>
+                  </div>
+                </div>
+                <!-- Entry Tabs -->
+                <div class="entry-tabs-container" id="address-entry-tabs">
+                  <!-- Populated by JavaScript -->
+                </div>
+                <div class="module-form-body">
+                  <div class="field-group entry-label-group">
+                    <label for="address-entryLabel">Entry Label</label>
+                    <input type="text" id="address-entryLabel" name="entryLabel" placeholder="Home, Work, Mailing..." data-module="address" data-field="entryLabel">
+                    <span class="field-helper">A name for this address (e.g., Home, Work)</span>
+                  </div>
+                  <div class="field-group">
+                    <label for="addressLine1">Street Address <span class="required-star">*</span></label>
+                    <input type="text" id="addressLine1" name="addressLine1" placeholder="123 Main Street, Apt 4B" data-module="address" data-field="addressLine1" required>
+                    <span class="field-helper">Include apartment/unit number if applicable</span>
+                    <span class="field-error" id="addressLine1-error"></span>
+                  </div>
+                  <div class="field-row">
+                    <div class="field-group flex-2">
+                      <label for="city">City <span class="required-star">*</span></label>
+                      <input type="text" id="city" name="city" placeholder="San Francisco" data-module="address" data-field="city" required>
+                      <span class="field-error" id="city-error"></span>
+                    </div>
+                    <div class="field-group">
+                      <label for="state">State <span class="required-star">*</span></label>
+                      <input type="text" id="state" name="state" placeholder="CA" data-module="address" data-field="state" required>
+                      <span class="field-error" id="state-error"></span>
+                    </div>
+                    <div class="field-group">
+                      <label for="zipCode">ZIP Code <span class="required-star">*</span></label>
+                      <input type="text" id="zipCode" name="zipCode" placeholder="94102" data-module="address" data-field="zipCode" required>
+                      <span class="field-error" id="zipCode-error"></span>
+                    </div>
+                  </div>
+                  <div class="field-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" placeholder="United States" value="United States" data-module="address" data-field="country">
+                    <span class="field-helper">Defaults to United States</span>
+                  </div>
+                </div>
+                <div class="module-form-footer">
+                  <button type="button" class="btn btn-primary save-module-btn" data-module="address">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                      <path d="M17 21v-8H7v8M7 3v5h8"/>
+                    </svg>
+                    Save Address
+                  </button>
+                  <span class="save-status" id="address-save-status"></span>
+                </div>
+              </div>
+
+              <!-- Module: Employment (Multi-Entry) -->
+              <div class="module-form conditional multi-entry" data-module="employment" id="module-employment">
+                <div class="module-form-header">
+                  <div class="module-title-row">
+                    <h3>Employment History</h3>
+                    <span class="module-optional-badge">Recommended</span>
+                  </div>
+                  <p class="module-description">Add current and past jobs. Primary is used for autofill by default.</p>
+                  <div class="module-completion-row">
+                    <div class="completion-bar small">
+                      <div class="completion-fill" id="employment-completion-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="completion-text" id="employment-completion-text">0% complete</span>
+                  </div>
+                </div>
+                <!-- Entry Tabs -->
+                <div class="entry-tabs-container" id="employment-entry-tabs">
+                  <!-- Populated by JavaScript -->
+                </div>
+                <div class="module-form-body">
+                  <div class="field-group entry-label-group">
+                    <label for="employment-entryLabel">Entry Label</label>
+                    <input type="text" id="employment-entryLabel" name="entryLabel" placeholder="Current, Previous, Freelance..." data-module="employment" data-field="entryLabel">
+                    <span class="field-helper">A name for this job entry</span>
+                  </div>
+                  <div class="field-row">
+                    <div class="field-group">
+                      <label for="currentEmployer">Employer</label>
+                      <input type="text" id="currentEmployer" name="currentEmployer" placeholder="Acme Corporation" data-module="employment" data-field="currentEmployer">
+                      <span class="field-helper">Company or organization name</span>
+                    </div>
+                    <div class="field-group">
+                      <label for="jobTitle">Job Title</label>
+                      <input type="text" id="jobTitle" name="jobTitle" placeholder="Software Engineer" data-module="employment" data-field="jobTitle">
+                    </div>
+                  </div>
+                  <div class="field-row">
+                    <div class="field-group">
+                      <label for="startDate">Start Date</label>
+                      <input type="month" id="startDate" name="startDate" data-module="employment" data-field="startDate">
+                      <span class="field-helper">When you started</span>
+                    </div>
+                    <div class="field-group">
+                      <label for="endDate">End Date <span class="optional-tag">(leave blank if current)</span></label>
+                      <input type="month" id="endDate" name="endDate" data-module="employment" data-field="endDate">
+                    </div>
+                  </div>
+                  <div class="field-group">
+                    <label for="workEmail">Work Email <span class="optional-tag">(optional)</span></label>
+                    <input type="email" id="workEmail" name="workEmail" placeholder="john@company.com" data-module="employment" data-field="workEmail">
+                  </div>
+                </div>
+                <div class="module-form-footer">
+                  <div class="footer-actions">
+                    <button type="button" class="btn btn-secondary skip-module-btn" data-module="employment">
+                      Skip for now
+                    </button>
+                    <button type="button" class="btn btn-primary save-module-btn" data-module="employment">
+                      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                        <path d="M17 21v-8H7v8M7 3v5h8"/>
+                      </svg>
+                      Save Employment
+                    </button>
+                  </div>
+                  <span class="save-status" id="employment-save-status"></span>
+                </div>
+              </div>
+
+              <!-- Module: Education (Multi-Entry) -->
+              <div class="module-form conditional multi-entry" data-module="education" id="module-education">
+                <div class="module-form-header">
+                  <div class="module-title-row">
+                    <h3>Education History</h3>
+                    <span class="module-optional-badge">Recommended</span>
+                  </div>
+                  <p class="module-description">Add multiple degrees/schools. Primary is used for autofill by default.</p>
+                  <div class="module-completion-row">
+                    <div class="completion-bar small">
+                      <div class="completion-fill" id="education-completion-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="completion-text" id="education-completion-text">0% complete</span>
+                  </div>
+                </div>
+                <!-- Entry Tabs -->
+                <div class="entry-tabs-container" id="education-entry-tabs">
+                  <!-- Populated by JavaScript -->
+                </div>
+                <div class="module-form-body">
+                  <div class="field-group entry-label-group">
+                    <label for="education-entryLabel">Entry Label</label>
+                    <input type="text" id="education-entryLabel" name="entryLabel" placeholder="Bachelor's, Master's, High School..." data-module="education" data-field="entryLabel">
+                    <span class="field-helper">A name for this education entry</span>
+                  </div>
+                  <div class="field-group">
+                    <label for="schoolName">School/University</label>
+                    <input type="text" id="schoolName" name="schoolName" placeholder="University of California, Berkeley" data-module="education" data-field="schoolName">
+                    <span class="field-helper">Institution name</span>
+                  </div>
+                  <div class="field-row">
+                    <div class="field-group flex-2">
+                      <label for="degree">Degree</label>
+                      <input type="text" id="degree" name="degree" placeholder="Bachelor of Science" data-module="education" data-field="degree">
+                    </div>
+                    <div class="field-group">
+                      <label for="graduationYear">Graduation Year</label>
+                      <input type="text" id="graduationYear" name="graduationYear" placeholder="2020" maxlength="4" data-module="education" data-field="graduationYear">
+                    </div>
+                  </div>
+                  <div class="field-group">
+                    <label for="fieldOfStudy">Field of Study <span class="optional-tag">(optional)</span></label>
+                    <input type="text" id="fieldOfStudy" name="fieldOfStudy" placeholder="Computer Science" data-module="education" data-field="fieldOfStudy">
+                  </div>
+                </div>
+                <div class="module-form-footer">
+                  <div class="footer-actions">
+                    <button type="button" class="btn btn-secondary skip-module-btn" data-module="education">
+                      Skip for now
+                    </button>
+                    <button type="button" class="btn btn-primary save-module-btn" data-module="education">
+                      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                        <path d="M17 21v-8H7v8M7 3v5h8"/>
+                      </svg>
+                      Save Education
+                    </button>
+                  </div>
+                  <span class="save-status" id="education-save-status"></span>
+                </div>
+              </div>
+
+              <!-- Module: Government IDs (Sensitive) -->
+              <div class="module-form sensitive conditional" data-module="governmentIds" id="module-governmentIds">
+                <!-- Opt-in Gate -->
+                <div class="sensitive-gate" id="governmentIds-gate">
+                  <div class="gate-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                  </div>
+                  <h3 class="gate-title">Government ID Information</h3>
+                  <p class="gate-description">
+                    This section stores sensitive identification numbers. Your data is:
+                  </p>
+                  <ul class="gate-features">
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                      <span>Stored locally on your device only</span>
+                    </li>
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                      <span>You control when and where it's used</span>
+                    </li>
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                      <span>Never auto-submitted without your approval</span>
+                    </li>
+                  </ul>
+                  <div class="gate-toggle">
+                    <label class="toggle-label">
+                      <input type="checkbox" id="governmentIds-optin" class="optin-checkbox" data-module="governmentIds">
+                      <span class="toggle-switch"></span>
+                      <span class="toggle-text">Enable storing this information</span>
+                    </label>
+                  </div>
+                  <button type="button" class="btn btn-secondary skip-module-btn" data-module="governmentIds">
+                    Skip this section
+                  </button>
+                </div>
+
+                <!-- Sensitive Form (hidden until opt-in) -->
+                <div class="sensitive-form-content" id="governmentIds-content" style="display: none;">
+                  <div class="module-form-header">
+                    <div class="module-title-row">
+                      <h3>Government IDs</h3>
+                      <span class="module-sensitive-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        Sensitive
+                      </span>
+                    </div>
+                    <p class="module-description">Government-issued identification numbers. Default policy: Confirm before filling.</p>
+                    <div class="module-completion-row">
+                      <div class="completion-bar small">
+                        <div class="completion-fill" id="governmentIds-completion-fill" style="width: 0%"></div>
+                      </div>
+                      <span class="completion-text" id="governmentIds-completion-text">0% complete</span>
+                    </div>
+                  </div>
+                  <div class="module-form-body">
+                    <!-- SSN Field -->
+                    <div class="sensitive-field-group">
+                      <div class="field-header">
+                        <label for="ssn">Social Security Number</label>
+                        <div class="field-controls">
+                          <button type="button" class="reveal-btn" data-field="ssn" title="Show/Hide">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                          </button>
+                          <select class="policy-select" data-module="governmentIds" data-field="ssn" data-policy="true">
+                            <option value="never">Never autofill</option>
+                            <option value="confirm" selected>Confirm each time</option>
+                            <option value="on_click">On click only</option>
+                          </select>
+                        </div>
+                      </div>
+                      <input type="password" id="ssn" name="ssn" placeholder="XXX-XX-XXXX" data-module="governmentIds" data-field="ssn" data-sensitive="true" class="masked-input">
+                      <span class="field-helper">Full 9-digit SSN. Stored securely.</span>
+                    </div>
+
+                    <!-- Passport Number Field -->
+                    <div class="sensitive-field-group">
+                      <div class="field-header">
+                        <label for="passportNumber">Passport Number</label>
+                        <div class="field-controls">
+                          <button type="button" class="reveal-btn" data-field="passportNumber" title="Show/Hide">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                          </button>
+                          <select class="policy-select" data-module="governmentIds" data-field="passportNumber" data-policy="true">
+                            <option value="never">Never autofill</option>
+                            <option value="confirm" selected>Confirm each time</option>
+                            <option value="on_click">On click only</option>
+                          </select>
+                        </div>
+                      </div>
+                      <input type="password" id="passportNumber" name="passportNumber" placeholder="Passport number" data-module="governmentIds" data-field="passportNumber" data-sensitive="true" class="masked-input">
+                      <span class="field-helper">For travel and visa applications.</span>
+                    </div>
+
+                    <!-- Driver's License Field -->
+                    <div class="sensitive-field-group">
+                      <div class="field-header">
+                        <label for="driversLicenseNumber">Driver's License Number</label>
+                        <div class="field-controls">
+                          <button type="button" class="reveal-btn" data-field="driversLicenseNumber" title="Show/Hide">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                          </button>
+                          <select class="policy-select" data-module="governmentIds" data-field="driversLicenseNumber" data-policy="true">
+                            <option value="never">Never autofill</option>
+                            <option value="confirm" selected>Confirm each time</option>
+                            <option value="on_click">On click only</option>
+                          </select>
+                        </div>
+                      </div>
+                      <input type="password" id="driversLicenseNumber" name="driversLicenseNumber" placeholder="License number" data-module="governmentIds" data-field="driversLicenseNumber" data-sensitive="true" class="masked-input">
+                      <span class="field-helper">State-issued driver's license or ID number.</span>
+                    </div>
+
+                    <!-- Site Allowlist -->
+                    <div class="allowlist-section">
+                      <div class="allowlist-header">
+                        <label>Allowed Sites for Autofill</label>
+                        <span class="allowlist-helper">Only these domains can request autofill for this module</span>
+                      </div>
+                      <div class="allowlist-input-row">
+                        <input type="text" id="governmentIds-allowlist-input" placeholder="e.g., irs.gov" class="allowlist-input">
+                        <button type="button" class="btn btn-small add-allowlist-btn" data-module="governmentIds">Add</button>
+                      </div>
+                      <div class="allowlist-chips" id="governmentIds-allowlist-chips">
+                        <!-- Chips populated by JS -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="module-form-footer">
+                    <div class="footer-actions">
+                      <button type="button" class="btn btn-secondary" id="governmentIds-disable-btn" data-module="governmentIds">
+                        Disable & Clear
+                      </button>
+                      <button type="button" class="btn btn-primary save-module-btn" data-module="governmentIds">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                          <path d="M17 21v-8H7v8M7 3v5h8"/>
+                        </svg>
+                        Save Government IDs
+                      </button>
+                    </div>
+                    <span class="save-status" id="governmentIds-save-status"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Module: Voluntary Identity (Highly Sensitive) -->
+              <div class="module-form sensitive conditional" data-module="voluntaryIdentity" id="module-voluntaryIdentity">
+                <!-- Opt-in Gate -->
+                <div class="sensitive-gate" id="voluntaryIdentity-gate">
+                  <div class="gate-icon warning">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  </div>
+                  <h3 class="gate-title">Voluntary Self-Identification</h3>
+                  <p class="gate-description">
+                    This optional information is sometimes requested on forms for statistical purposes. 
+                    You are never required to provide it.
+                  </p>
+                  <ul class="gate-features">
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                      <span>100% optional — skip anytime</span>
+                    </li>
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                      <span>Default policy: Never autofill automatically</span>
+                    </li>
+                    <li>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                      <span>You choose when to use on a per-site basis</span>
+                    </li>
+                  </ul>
+                  <div class="gate-toggle">
+                    <label class="toggle-label">
+                      <input type="checkbox" id="voluntaryIdentity-optin" class="optin-checkbox" data-module="voluntaryIdentity">
+                      <span class="toggle-switch"></span>
+                      <span class="toggle-text">Enable storing this information</span>
+                    </label>
+                  </div>
+                  <button type="button" class="btn btn-secondary skip-module-btn" data-module="voluntaryIdentity">
+                    Skip this section
+                  </button>
+                </div>
+
+                <!-- Sensitive Form (hidden until opt-in) -->
+                <div class="sensitive-form-content" id="voluntaryIdentity-content" style="display: none;">
+                  <div class="module-form-header">
+                    <div class="module-title-row">
+                      <h3>Voluntary Self-Identification</h3>
+                      <span class="module-sensitive-badge critical">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        Highly Sensitive
+                      </span>
+                    </div>
+                    <p class="module-description">Optional demographic information. Default policy: Never autofill.</p>
+                    <div class="module-completion-row">
+                      <div class="completion-bar small">
+                        <div class="completion-fill" id="voluntaryIdentity-completion-fill" style="width: 0%"></div>
+                      </div>
+                      <span class="completion-text" id="voluntaryIdentity-completion-text">0% complete</span>
+                    </div>
+                  </div>
+                  <div class="module-form-body">
+                    <!-- Race/Ethnicity Field -->
+                    <div class="sensitive-field-group">
+                      <div class="field-header">
+                        <label for="raceEthnicity">Race/Ethnicity</label>
+                        <div class="field-controls">
+                          <button type="button" class="reveal-btn" data-field="raceEthnicity" title="Show/Hide">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                          </button>
+                          <select class="policy-select" data-module="voluntaryIdentity" data-field="raceEthnicity" data-policy="true">
+                            <option value="never" selected>Never autofill</option>
+                            <option value="confirm">Confirm each time</option>
+                            <option value="on_click">On click only</option>
+                          </select>
+                        </div>
+                      </div>
+                      <input type="password" id="raceEthnicity" name="raceEthnicity" placeholder="Your response" data-module="voluntaryIdentity" data-field="raceEthnicity" data-sensitive="true" class="masked-input">
+                      <span class="field-helper">Optional. For EEO reporting purposes.</span>
+                    </div>
+
+                    <!-- Gender Identity Field -->
+                    <div class="sensitive-field-group">
+                      <div class="field-header">
+                        <label for="genderIdentity">Gender Identity</label>
+                        <div class="field-controls">
+                          <button type="button" class="reveal-btn" data-field="genderIdentity" title="Show/Hide">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                          </button>
+                          <select class="policy-select" data-module="voluntaryIdentity" data-field="genderIdentity" data-policy="true">
+                            <option value="never" selected>Never autofill</option>
+                            <option value="confirm">Confirm each time</option>
+                            <option value="on_click">On click only</option>
+                          </select>
+                        </div>
+                      </div>
+                      <input type="password" id="genderIdentity" name="genderIdentity" placeholder="Your response" data-module="voluntaryIdentity" data-field="genderIdentity" data-sensitive="true" class="masked-input">
+                      <span class="field-helper">Optional. How you identify.</span>
+                    </div>
+
+                    <!-- Disability Status Field -->
+                    <div class="sensitive-field-group">
+                      <div class="field-header">
+                        <label for="disabilityStatus">Disability Status</label>
+                        <div class="field-controls">
+                          <button type="button" class="reveal-btn" data-field="disabilityStatus" title="Show/Hide">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                          </button>
+                          <select class="policy-select" data-module="voluntaryIdentity" data-field="disabilityStatus" data-policy="true">
+                            <option value="never" selected>Never autofill</option>
+                            <option value="confirm">Confirm each time</option>
+                            <option value="on_click">On click only</option>
+                          </select>
+                        </div>
+                      </div>
+                      <input type="password" id="disabilityStatus" name="disabilityStatus" placeholder="Your response" data-module="voluntaryIdentity" data-field="disabilityStatus" data-sensitive="true" class="masked-input">
+                      <span class="field-helper">Optional. For ADA and accommodation purposes.</span>
+                    </div>
+
+                    <!-- Veteran Status Field -->
+                    <div class="sensitive-field-group">
+                      <div class="field-header">
+                        <label for="veteranStatus">Veteran Status</label>
+                        <div class="field-controls">
+                          <button type="button" class="reveal-btn" data-field="veteranStatus" title="Show/Hide">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                              <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                          </button>
+                          <select class="policy-select" data-module="voluntaryIdentity" data-field="veteranStatus" data-policy="true">
+                            <option value="never" selected>Never autofill</option>
+                            <option value="confirm">Confirm each time</option>
+                            <option value="on_click">On click only</option>
+                          </select>
+                        </div>
+                      </div>
+                      <input type="password" id="veteranStatus" name="veteranStatus" placeholder="Your response" data-module="voluntaryIdentity" data-field="veteranStatus" data-sensitive="true" class="masked-input">
+                      <span class="field-helper">Optional. Protected veteran status.</span>
+                    </div>
+
+                    <!-- Site Allowlist -->
+                    <div class="allowlist-section">
+                      <div class="allowlist-header">
+                        <label>Allowed Sites for Autofill</label>
+                        <span class="allowlist-helper">Only these domains can request autofill for this module</span>
+                      </div>
+                      <div class="allowlist-input-row">
+                        <input type="text" id="voluntaryIdentity-allowlist-input" placeholder="e.g., workday.com" class="allowlist-input">
+                        <button type="button" class="btn btn-small add-allowlist-btn" data-module="voluntaryIdentity">Add</button>
+                      </div>
+                      <div class="allowlist-chips" id="voluntaryIdentity-allowlist-chips">
+                        <!-- Chips populated by JS -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="module-form-footer">
+                    <div class="footer-actions">
+                      <button type="button" class="btn btn-secondary" id="voluntaryIdentity-disable-btn" data-module="voluntaryIdentity">
+                        Disable & Clear
+                      </button>
+                      <button type="button" class="btn btn-primary save-module-btn" data-module="voluntaryIdentity">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                          <path d="M17 21v-8H7v8M7 3v5h8"/>
+                        </svg>
+                        Save Voluntary Identity
+                      </button>
+                    </div>
+                    <span class="save-status" id="voluntaryIdentity-save-status"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Review -->
+        <div class="step-content" data-step="review">
+          <div class="step-header">
+            <span class="step-badge">Quality Check</span>
+            <h1>Review &amp; Standardize</h1>
+            <p class="step-description">
+              We'll check your profile for completeness and formatting issues.
+            </p>
+          </div>
+
+          <!-- Profile Readiness Score -->
+          <div class="readiness-section" id="readiness-section">
+            <div class="readiness-score-card">
+              <div class="readiness-main">
+                <div class="readiness-circle" id="readiness-circle">
+                  <svg viewBox="0 0 100 100">
+                    <circle class="readiness-bg" cx="50" cy="50" r="45"/>
+                    <circle class="readiness-fill" cx="50" cy="50" r="45" id="readiness-progress"/>
+                  </svg>
+                  <div class="readiness-percent" id="readiness-percent">0%</div>
+                </div>
+                <div class="readiness-info">
+                  <h3>Profile Readiness</h3>
+                  <p class="readiness-status" id="readiness-status">Calculating...</p>
+                </div>
+              </div>
+              <div class="readiness-modules" id="readiness-modules">
+                <!-- Module readiness bars populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Issues Checklist -->
+          <div class="issues-section" id="issues-section">
+            <div class="issues-header">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                  <path d="M9 11l3 3L22 4"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+                Issues to Address
+              </h3>
+              <span class="issues-count" id="issues-count">0 issues</span>
+            </div>
+
+            <!-- Critical Issues (Missing Required) -->
+            <div class="issues-group critical" id="critical-issues-group" style="display: none;">
+              <div class="issues-group-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <span>Missing Required Fields</span>
+                <span class="issue-badge critical" id="critical-count">0</span>
+              </div>
+              <div class="issues-list" id="critical-issues-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Warnings (Format Issues) -->
+            <div class="issues-group warning" id="warning-issues-group" style="display: none;">
+              <div class="issues-group-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span>Format Warnings</span>
+                <span class="issue-badge warning" id="warning-count">0</span>
+              </div>
+              <div class="issues-list" id="warning-issues-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Info (Suggestions) -->
+            <div class="issues-group info" id="info-issues-group" style="display: none;">
+              <div class="issues-group-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="16" x2="12" y2="12"/>
+                  <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                <span>Suggestions</span>
+                <span class="issue-badge info" id="info-count">0</span>
+              </div>
+              <div class="issues-list" id="info-issues-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- All Clear State -->
+            <div class="issues-clear" id="issues-clear" style="display: none;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <path d="M22 4L12 14.01l-3-3"/>
+              </svg>
+              <div class="clear-text">
+                <h4>All Clear!</h4>
+                <p>Your profile is ready for form filling.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blocking Message -->
+          <div class="blocking-message" id="blocking-message" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span>Please fix all critical issues before continuing</span>
+          </div>
+
+          <!-- Review Data Summary -->
+          <div class="review-data-section">
+            <div class="review-data-header">
+              <h3>Profile Data Summary</h3>
+              <button class="btn btn-secondary btn-sm" id="edit-profile-btn">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                Edit All
+              </button>
+            </div>
+            <div class="review-sections" id="review-sections">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Test -->
+        <div class="step-content" data-step="test">
+          <div class="step-header">
+            <span class="step-badge">Try It Out</span>
+            <h1>Test on a Sample Form</h1>
+            <p class="step-description">
+              Let's test the extension on a sample form to make sure everything works.
+            </p>
+          </div>
+
+          <div class="test-area">
+            <div class="test-form-container">
+              <div class="test-form-header">
+                <span class="form-label">Sample Contact Form</span>
+                <button class="btn btn-primary btn-sm" id="fill-test-btn">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                  Fill Form
+                </button>
+              </div>
+              <form class="test-form" id="test-form">
+                <div class="field-row">
+                  <div class="field-group">
+                    <label>Full Name</label>
+                    <input type="text" id="test-name" name="name" readonly>
+                  </div>
+                  <div class="field-group">
+                    <label>Email</label>
+                    <input type="email" id="test-email" name="email" readonly>
+                  </div>
+                </div>
+                <div class="field-row">
+                  <div class="field-group">
+                    <label>Phone</label>
+                    <input type="tel" id="test-phone" name="phone" readonly>
+                  </div>
+                  <div class="field-group">
+                    <label>City</label>
+                    <input type="text" id="test-city" name="city" readonly>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="test-result" id="test-result">
+              <p>Click "Fill Form" to test your profile data</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: Finish -->
+        <div class="step-content" data-step="finish">
+          <div class="step-header centered">
+            <div class="finish-icon">🎉</div>
+            <h1>You're All Set!</h1>
+            <p class="step-description">
+              Your profile is ready. Start filling forms with a single click.
+            </p>
+          </div>
+
+          <div class="finish-stats">
+            <div class="stat-card">
+              <span class="stat-value" id="fields-filled">0</span>
+              <span class="stat-label">Profile Fields</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value" id="form-types-count">0</span>
+              <span class="stat-label">Form Types</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value" id="time-saved">~10 min</span>
+              <span class="stat-label">Saved Per Form</span>
+            </div>
+          </div>
+
+          <div class="finish-next-steps">
+            <h3>Next Steps</h3>
+            <ul class="next-steps-list">
+              <li>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <path d="M22 4L12 14.01l-3-3"/>
+                </svg>
+                Click the extension icon on any form page
+              </li>
+              <li>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <path d="M22 4L12 14.01l-3-3"/>
+                </svg>
+                Enable the extension and click "Fill this page"
+              </li>
+              <li>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <path d="M22 4L12 14.01l-3-3"/>
+                </svg>
+                Review and submit the form manually
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="step-navigation">
+          <button class="btn btn-secondary" id="prev-btn" disabled>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back
+          </button>
+          <button class="btn btn-primary" id="next-btn">
+            Next
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="onboarding.js"></script>
+</body>
+</html>
