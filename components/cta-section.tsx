@@ -36,7 +36,7 @@ export default function CTASection() {
               Install Bureaucracy Autopilot and finish applications faster. Your profile, your data, your control.
             </p>
             <button className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors">
-              Add to Chrome — It's Free
+              Add to Chrome — It&apos;s Free
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
